@@ -16,10 +16,10 @@ class SHADOWOFKNIGHTS_API UMyObject : public UObject
 public:
 	UMyObject();
 
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, Category = "MyVariables")
 	float MyFloat;
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "MyFunctions")
 	void MyFunction();
 	
 };
