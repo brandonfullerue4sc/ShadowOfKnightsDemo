@@ -40,5 +40,4 @@ private:
 	void MoveRight(float Value);
 
 	FVector CurrentVelocity;
-	
 };
