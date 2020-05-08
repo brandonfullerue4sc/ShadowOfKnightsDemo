@@ -27,6 +27,9 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UPROPERTY(VisibleAnywhere, Category = "Mesh")
+	class USceneComponent* SceneComponent;
+
+	UPROPERTY(VisibleAnywhere, Category = "Mesh")
 	class UStaticMeshComponent* MeshComponent;
 
 	UPROPERTY(VisibleAnywhere, Category = "Mesh")
@@ -57,4 +60,9 @@ public:
 private:
 	void MoveForward(float input);
 	void MoveRight(float input);
+
+	void PitchCamera(float AxisValue);
+	void YawCamera(float AxisValue);
+
+	FVector2D CameraInput;
 };
