@@ -7,6 +7,7 @@
 #include "Components/InputComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
+#include "ColliderMovementComponent.h"
 
 // Sets default values
 ACollider::ACollider()
@@ -43,6 +44,10 @@ ACollider::ACollider()
 	Camera->SetupAttachment(SpringArm, USpringArmComponent::SocketName);
 
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
+
+	OurMovementComponent = CreateDefaultSubobject<UColliderMovementComponent>(TEXT("OurMovementComponent"));
+	OurMovementComponent->UpdatedComponent = RootComponent;
+
 }
 
 // Called when the game starts or when spawned
@@ -68,12 +73,28 @@ void ACollider::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 void ACollider::MoveForward(float Input)
 {
 	FVector Forward = GetActorForwardVector();
-	AddMovementInput(Input * Forward);
+	//AddMovementInput(Input * Forward);
+
+	if (OurMovementComponent)
+	{
+		OurMovementComponent->AddInputVector(Input * Forward);
+	}
 }
 
 void ACollider::MoveRight(float Input)
 {
 	FVector Right = GetActorRightVector();
-	AddMovementInput(Input * Right);
+
+	//AddMovementInput(Input * Right);
+
+	if (OurMovementComponent)
+	{
+		OurMovementComponent->AddInputVector(Input * Right);
+	}
+
 }
 
+UPawnMovementComponent* ACollider::GetMovementComponent() const
+{
+	return OurMovementComponent;
+}
