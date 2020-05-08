@@ -3,6 +3,7 @@
 #include "Collider.h"
 #include "Components/SphereComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "Components/SceneComponent.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Components/InputComponent.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -25,17 +26,33 @@ ACollider::ACollider()
 	MeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComponent"));
 	MeshComponent->SetupAttachment(GetRootComponent());
 
-	/*static ConstructorHelpers::FObjectFinder<UStaticMesh> MeshComponentAsset(TEXT(""));
+	/*==================================================================================== 
+	/* TODO
+	/* need to place a mesh reference point in here *Look at tutorial example on Stephen B 
+	/* section 5: The Pawn class
+	/* video tutorial 27. Pawn Movement Input (continued)
+	/* Time of video: 23 minutes and 30 seconds
+	/*====================================================================================*/
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> MeshComponentAsset(TEXT(""));
 	if (MeshComponentAsset.Succeeded())
 	{
 		MeshComponent->SetStaticMesh(MeshComponentAsset.Object);
 		MeshComponent->SetRelativeLocation(FVector(0.f, 0.f, -40.f));
 		MeshComponent->SetWorldScale3D(FVector(0.8f, 0.8f, 0.8f));
-	}*/
+	}
 
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
 	SpringArm->SetupAttachment(GetRootComponent());
-	//SpringArm->RelativeRotation = FRotator(-45.f, 0.f, 0.f);
+
+	/*====================================================================================
+	/* TODO
+	/* Need to make sure the line expression works once built currently not locating the 
+	/* USceneComponent which it states its set to private
+	/* section 5: The Pawn class
+	/* video tutorial 28 or 29 of tutorials. Pawn Movement Input (continued)
+	/*====================================================================================*/
+	SpringArm->RelativeRotation = FRotator(-45.f, 0.f, 0.f);
+	//SpringArm->RelativeLocation = FRotator(-45.f, 0.f, 0.f);
 	SpringArm->TargetArmLength = 400.f;
 	SpringArm->bEnableCameraLag = true;
 	SpringArm->CameraLagSpeed = 3.0f;
@@ -70,18 +87,18 @@ void ACollider::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAxis(TEXT("MoveRight"), this, &ACollider::MoveRight);
 }
 
-void ACollider::MoveForward(float Input)
+void ACollider::MoveForward(float input)
 {
 	FVector Forward = GetActorForwardVector();
 	//AddMovementInput(Input * Forward);
 
 	if (OurMovementComponent)
 	{
-		OurMovementComponent->AddInputVector(Input * Forward);
+		OurMovementComponent->AddInputVector(input * Forward);
 	}
 }
 
-void ACollider::MoveRight(float Input)
+void ACollider::MoveRight(float input)
 {
 	FVector Right = GetActorRightVector();
 
@@ -89,7 +106,7 @@ void ACollider::MoveRight(float Input)
 
 	if (OurMovementComponent)
 	{
-		OurMovementComponent->AddInputVector(Input * Right);
+		OurMovementComponent->AddInputVector(input * Right);
 	}
 
 }

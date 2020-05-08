@@ -51,12 +51,10 @@ public:
 
 	FORCEINLINE UCameraComponent* GetCameraComponent() { return Camera; }
 	FORCEINLINE void SetCameraComponent(UCameraComponent* InCamera) { Camera = InCamera; }
-
 	FORCEINLINE USpringArmComponent* GetSpringArmComponent() { return SpringArm; }
-	FORCEINLINE	void SetSpringArmComponent(USpringArmComponent* InSpringArm) { SpringArm = InSpringArm; }
-
+	FORCEINLINE void SetSpringArmComponent(USpringArmComponent* InSpringArm) { SpringArm = InSpringArm; }
 
 private:
-	void MoveForward(float Input);
-	void MoveRight(float Input);
+	void MoveForward(float input);
+	void MoveRight(float input);
 };
