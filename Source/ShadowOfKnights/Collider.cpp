@@ -16,7 +16,7 @@ ACollider::ACollider()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
+	RootComponent = CreateDefaultSubobject<USphereComponent>(TEXT("RootComponent")); /* USceneComponent called here! */
 
 	SphereComponent = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent"));
 	SphereComponent->SetupAttachment(GetRootComponent());
@@ -26,33 +26,25 @@ ACollider::ACollider()
 	MeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComponent"));
 	MeshComponent->SetupAttachment(GetRootComponent());
 
-	/*==================================================================================== 
-	/* TODO
-	/* need to place a mesh reference point in here *Look at tutorial example on Stephen B 
-	/* section 5: The Pawn class
-	/* video tutorial 27. Pawn Movement Input (continued)
-	/* Time of video: 23 minutes and 30 seconds
-	/*====================================================================================*/
-	/*static ConstructorHelpers::FObjectFinder<UStaticMesh> MeshComponentAsset(TEXT(""));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> MeshComponentAsset(TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_Sphere.Shape_Sphere'"));
 	if (MeshComponentAsset.Succeeded())
 	{
 		MeshComponent->SetStaticMesh(MeshComponentAsset.Object);
 		MeshComponent->SetRelativeLocation(FVector(0.f, 0.f, -40.f));
 		MeshComponent->SetWorldScale3D(FVector(0.8f, 0.8f, 0.8f));
-	}*/ 
+	} 
 
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
 	SpringArm->SetupAttachment(GetRootComponent());
 
 	/*====================================================================================
-	/* TODO
+	/* TODO to seek advice for why this expression isn't working
 	/* Need to make sure the line expression works once built currently not locating the 
 	/* USceneComponent which it states its set to private
 	/* section 5: The Pawn class
 	/* video tutorial 28 or 29 of tutorials. Pawn Movement Input (continued)
 	/*====================================================================================*/
-	//SpringArm->RelativeRotation = FRotator(-45.f, 0.f, 0.f);
-
+//	SpringArm->RelativeRotation = FRotator(-45.f, 0.f, 0.f);
 	SpringArm->TargetArmLength = 400.f;
 	SpringArm->bEnableCameraLag = true;
 	SpringArm->CameraLagSpeed = 3.0f;
@@ -113,7 +105,6 @@ void ACollider::MoveRight(float input)
 	{
 		OurMovementComponent->AddInputVector(input * Right);
 	}
-
 }
 
 void ACollider::PitchCamera(float AxisValue)

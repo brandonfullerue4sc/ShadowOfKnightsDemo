@@ -26,10 +26,6 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	UPROPERTY(VisibleAnywhere, Category = "Mesh")
-	class USceneComponent* SceneComponent;
-
-	UPROPERTY(VisibleAnywhere, Category = "Mesh")
 	class UStaticMeshComponent* MeshComponent;
 
 	UPROPERTY(VisibleAnywhere, Category = "Mesh")
@@ -41,14 +37,10 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = "Mesh")
 	class USpringArmComponent* SpringArm;
 
-	UPROPERTY(VisibleAnywhere, Category = "Mesh")
 	class UColliderMovementComponent* OurMovementComponent;
-
-	virtual UPawnMovementComponent* GetMovementComponent() const override;
 
 	FORCEINLINE UStaticMeshComponent* GetMeshComponent() { return MeshComponent; }
 	FORCEINLINE void SetMeshComponent(UStaticMeshComponent* Mesh) { MeshComponent = Mesh; }
-
 	FORCEINLINE USphereComponent* GetSphereComponent() { return SphereComponent; }
 	FORCEINLINE void SetSphereComponent(USphereComponent* Sphere) { SphereComponent = Sphere; }
 
@@ -56,6 +48,8 @@ public:
 	FORCEINLINE void SetCameraComponent(UCameraComponent* InCamera) { Camera = InCamera; }
 	FORCEINLINE USpringArmComponent* GetSpringArmComponent() { return SpringArm; }
 	FORCEINLINE void SetSpringArmComponent(USpringArmComponent* InSpringArm) { SpringArm = InSpringArm; }
+	
+	virtual UPawnMovementComponent* GetMovementComponent() const override;
 
 private:
 	void MoveForward(float input);
