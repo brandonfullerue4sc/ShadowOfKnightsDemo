@@ -6,9 +6,6 @@
 #include "Animation/AnimInstance.h"
 #include "MainAnimInstance.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class SHADOWOFKNIGHTS_API UMainAnimInstance : public UAnimInstance
 {

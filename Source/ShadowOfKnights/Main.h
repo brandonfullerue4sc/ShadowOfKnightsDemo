@@ -20,7 +20,7 @@ public:
 	class USpringArmComponent* CameraBoom;
 
 	/** Follow Camera*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "truye"))
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FollowCamera;
 
 	/**Base Turn rates to scale turning functions for the camera */
@@ -28,8 +28,6 @@ public:
 	float BaseTurnRate;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
 	float BaseLookUpRate;
-
-
 
 protected:
 	// Called when the game starts or when spawned
@@ -47,7 +45,6 @@ public:
 
 	/** Called for side to side input */
 	void MoveRight(float Value);
-
 
 	/** Called via input to turn at a given rate
 	 * @param Rate This is a normalized rate, i.e 1.0 means 100% of desired turn rate
