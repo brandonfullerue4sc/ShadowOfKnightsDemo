@@ -28,7 +28,7 @@ AFloorSwitch::AFloorSwitch()
 	Door = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Door"));
 	Door->SetupAttachment(GetRootComponent());
 
-	SwitchTime = .9f;
+	SwitchTime = 2.f;
 	bCharacterOnSwitch = false;
 }
 
