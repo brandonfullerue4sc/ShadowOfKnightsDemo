@@ -43,7 +43,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player Stats")
 	float Stamina;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player Stats")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Stats")
 	int32 Coins;
 
 	/**Base Turn rates to scale turning functions for the camera */
