@@ -46,6 +46,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Stats")
 	int32 Coins;
 
+	void DecrementHealth(float Amount);
+
+	void Die();
+
+	void IncrementCoins(int32 Amount);
+
 	/**Base Turn rates to scale turning functions for the camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
 	float BaseTurnRate;
