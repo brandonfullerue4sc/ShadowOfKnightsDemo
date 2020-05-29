@@ -35,6 +35,7 @@ public:
 	// Sets default values for this character's properties
 	AMain();
 
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Enums")
 	EMovementStatus MovementStatus;
 
@@ -59,7 +60,6 @@ public:
 	float SprintingSpeed;
 
 	bool bShiftKeyDown;
-
 
 	/** Pressed down to enable sprinting*/
 	void ShiftKeyDown();
@@ -139,4 +139,9 @@ public:
 
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Items")
+	class AWeapon* EquippedWeapon;
+
+	FORCEINLINE void SetEquippedWeapon(AWeapon* WeaponToSet) { EquippedWeapon = WeaponToSet; }
 };
