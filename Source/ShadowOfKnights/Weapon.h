@@ -16,9 +16,14 @@ class SHADOWOFKNIGHTS_API AWeapon : public AItem
 public:
     AWeapon();
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item | Particle")
+    bool bWeaponParticles;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item | Sound")
+    class USoundCue* OnEquipSound;
+
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "SkeletalMesh")
     class USkeletalMeshComponent* SkeletalMesh;
-
 
 	virtual void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) override;
 

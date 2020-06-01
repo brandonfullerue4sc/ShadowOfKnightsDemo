@@ -28,3 +28,4 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Movement")
 	class AMain* Main;
 };
+ 
