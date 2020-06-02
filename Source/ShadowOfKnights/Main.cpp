@@ -202,7 +202,7 @@ void AMain::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void AMain::MoveForward(float Value)
 {
-	if ((Controller != nullptr) && (Value != 0.0f))
+	if ((Controller != nullptr) && (Value != 0.0f) && (!bAttacking))
 	{
 		// Find which way is forward
 		const FRotator Rotation = Controller->GetControlRotation();
@@ -215,12 +215,15 @@ void AMain::MoveForward(float Value)
 
 void AMain::MoveRight(float Value)
 {
-	// Find which way is right
-	const FRotator Rotation = Controller->GetControlRotation();
-	const FRotator YawRotation(0.f, Rotation.Yaw, 0.f);
+	if ((Controller != nullptr) && (Value != 0.0f) && (!bAttacking))
+	{
+		// Find which way is right
+		const FRotator Rotation = Controller->GetControlRotation();
+		const FRotator YawRotation(0.f, Rotation.Yaw, 0.f);
 
-	const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
-	AddMovementInput(Direction, Value);
+		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
+		AddMovementInput(Direction, Value);
+	}
 }
 
 void AMain::TurnAtRate(float Rate)
@@ -313,13 +316,24 @@ void AMain::SetEquippedWeapon(AWeapon* WeaponToSet)
 
 void AMain::Attack()
 {
-	bAttacking = true;
-
-	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
-	if (AnimInstance && CombatMontage)
+	if (!bAttacking)
 	{
-		AnimInstance->Montage_Play(CombatMontage, 1.35f);
-		AnimInstance->Montage_JumpToSection(FName("Attack_1"), CombatMontage);
+		bAttacking = true;
+		UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+		if (AnimInstance && CombatMontage)
+		{
+			AnimInstance->Montage_Play(CombatMontage, 1.35f);
+			AnimInstance->Montage_JumpToSection(FName("Attack_1"), CombatMontage);
+		}
+	}
+}
+
+void AMain::AttackEnd()
+{
+	bAttacking = false;
+	if (bLMBDown)
+	{
+		Attack();
 	}
 }
 
