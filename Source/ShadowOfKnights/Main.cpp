@@ -293,6 +293,13 @@ void AMain::DecrementHealth(float Amount)
 	}
 }
 
+float AMain::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser)
+{
+	DecrementHealth(DamageAmount);
+
+	return DamageAmount;
+}
+
 void AMain::IncrementCoins(int32 Amount)
 {
 	Coins += Amount;
@@ -300,7 +307,12 @@ void AMain::IncrementCoins(int32 Amount)
 
 void AMain::Die()
 {
-
+	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+	if (AnimInstance && CombatMontage)
+	{
+		AnimInstance->Montage_Play(CombatMontage, 1.0f);
+		AnimInstance->Montage_JumpToSection(FName("Death"));
+	}
 }
 
 void AMain::SetMovementStatus(EMovementStatus Status)
@@ -385,3 +397,5 @@ void AMain::SetInterpToEnemy(bool Interp)
 {
 	bInterpToEnemy = Interp;
 }
+
+

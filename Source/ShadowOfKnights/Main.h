@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "GameFramework/Actor.h"
 #include "Main.generated.h"
 
 UENUM(BlueprintType)
@@ -115,6 +116,8 @@ public:
 	int32 Coins;
 
 	void DecrementHealth(float Amount);
+
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser);
 
 	void Die();
 
