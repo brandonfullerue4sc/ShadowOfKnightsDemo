@@ -12,6 +12,7 @@ enum class EMovementStatus : uint8
 {
 	EMS_Normal					UMETA(DisplayName = "Normal"),
 	EMS_Sprinting				UMETA(DisplayName = "Sprinting"),
+	EMS_Dead					UMETA(DisplayName = "Dead"),
 
 	EMS_MAX						UMETA(DisplayName = "DefaultMAX")
 };
@@ -129,10 +130,12 @@ public:
 	void DecrementHealth(float Amount);
 
 	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser);
-
+	
+	void IncrementCoins(int32 Amount);
+	
 	void Die();
 
-	void IncrementCoins(int32 Amount);
+	virtual void Jump() override;
 
 	/**Base Turn rates to scale turning functions for the camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
@@ -197,4 +200,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void PlaySwingSound();
+
+	UFUNCTION(BlueprintCallable)
+	void DeathEnd();
 };
